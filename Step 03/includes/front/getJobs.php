@@ -18,7 +18,7 @@
                   <div class=\"card-action\">
                     <a href=\"\" class=\"activator\" jobid='job-".$rep["id"]."'>Learn more</a>
                   </div>
-                  <div class=\"card-reveal\"><span class=\"card-title grey-text text-darken-4 desactivator\">".utf8_encode($rep["titre"])."<i class=\"material-icons right\" jobid='job-".$rep["id"]."' action='close'>close</i></span>
+                  <div class=\"card-reveal\"><span class=\"card-title grey-text desactivator text-darken-4\" jobid='job-".$rep["id"]."' action='close'>".utf8_encode($rep["titre"])."<i class=\"material-icons right\">close</i></span>
       <p>".utf8_encode($rep["description_long"])."</p></div>
                 </div>
               </div>";
