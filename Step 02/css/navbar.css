@@ -1,0 +1,30 @@
+.sidenav {
+  position: static !important;
+  width:100%;
+  color:white;
+  height:100%;
+}
+.profil_connect {
+  border-bottom:1px solid black;
+  padding-bottom:20px;
+  margin-bottom:20px;
+}
+.profil_connect:hover {
+  color:green;
+  text-decoration: underline;
+}
+.nav_search {
+  width:90% !important;
+}
+.color_nav {
+  background-color:#084454 !important;
+}
+.nav_hashtags_content  p {
+  display:inline-block;
+  margin-left:3px;
+  margin-right:2px;
+}
+.nav_hashtags_content  p:hover {
+  color:green;
+  cursor:pointer;
+}
