@@ -19,3 +19,12 @@
 .color_nav {
   background-color:#084454 !important;
 }
+.nav_hashtags_content  p {
+  display:inline-block;
+  margin-left:3px;
+  margin-right:2px;
+}
+.nav_hashtags_content  p:hover {
+  color:green;
+  cursor:pointer;
+}
