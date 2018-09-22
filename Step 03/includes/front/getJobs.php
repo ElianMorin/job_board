@@ -12,7 +12,7 @@
         echo "<div class='col s12 m12 l12'>
                 <div id='job-".$rep["id"]."' class='card'>
                   <div class='card-content'>
-                    <span class='card-title activator' jobid='job-".$rep["id"]."'>".utf8_encode($rep["titre"])."</span>
+                    <span class='card-title' jobid='job-".$rep["id"]."'>".utf8_encode($rep["titre"])."</span>
                     <p>".utf8_encode($rep["description"])."</p>
                   </div>
                   <div class=\"card-action\">
