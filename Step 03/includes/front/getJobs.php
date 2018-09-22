@@ -10,14 +10,16 @@
       $req->execute();
       while($rep = $req->fetch()) {
         echo "<div class='col s12 m12 l12'>
-                <div class='card'>
+                <div id='job-".$rep["id"]."' class='card'>
                   <div class='card-content'>
-                    <span class='card-title'>".utf8_encode($rep["titre"])."</span>
+                    <span class='card-title activator' jobid='job-".$rep["id"]."'>".utf8_encode($rep["titre"])."</span>
                     <p>".utf8_encode($rep["description"])."</p>
                   </div>
                   <div class=\"card-action\">
-                    <a href=\"#\">Learn more</a>
+                    <a href=\"\" class=\"activator\" jobid='job-".$rep["id"]."'>Learn more</a>
                   </div>
+                  <div class=\"card-reveal\"><span class=\"card-title grey-text text-darken-4\">".utf8_encode($rep["titre"])."<i class=\"material-icons right desactivator\" jobid='job-".$rep["id"]."' action='close'>close</i></span>
+      <p>".utf8_encode($rep["description_long"])."</p></div>
                 </div>
               </div>";
       }
