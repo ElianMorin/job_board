@@ -20,9 +20,25 @@ $(document).ready(function(){
          "height":newHeight
        })
      } else {
-       var newHeight = parseInt($("#"+id).css('height').replace(/[a-z]/gmi,""))*2;
-       $("#"+id).first().animate({
-         "height":newHeight
+       $.getJSON({
+         url: url_api+"getjobs/id/"+id.split('-')[1]+"/row/description_long",
+         crossDomain: true,
+         dataType: 'jsonp',
+         contentType: 'application/json',
+         responseType: 'application/json',
+         xhrFields: {
+            withCredentials: true
+        },
+         success:function(res) {
+           console.log(res);
+           var newHeight = parseInt($("#"+id).css('height').replace(/[a-z]/gmi,""))*2;
+           $("#"+id).first().animate({
+             "height":newHeight
+           })
+         },
+         error:function(err){
+           console.log("err"+err);
+         }
        })
      }
    });
