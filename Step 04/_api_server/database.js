@@ -1,3 +1,8 @@
+/*******************************************************************************
+
+      DATABASE - API LEBONJOB
+                                                                          jl&em
+*******************************************************************************/
 const mysql2 = require('mysql2').createPool({
     host:'127.0.0.1',
     user:'root',
@@ -13,9 +18,10 @@ function connect(callback) {
     conn.release();
   });
 }
-
+/******************************************************************************/
 module.exports = {
-  getjobs: function(page,search,callback) {
+  /// -> job_advertisements
+  /*get*/getjobs: function(page,search,callback) {
     var minPage = displayPerPage*page;
     var maxPage = displayPerPage*(page+1);
     connect(function(mysql) {
@@ -56,7 +62,7 @@ module.exports = {
       }
     })
   },
-  getjobsbyid: function(id, callback) {
+  /*get*/getjobsbyid: function(id, callback) {
     connect(function(mysql) {
       mysql.query('SELECT * FROM job_advertisements WHERE id=?',[id],function(err,r) {
         if (err) {
@@ -67,7 +73,7 @@ module.exports = {
       });
     });
   },
-  addJob: function(toadd,ownerToAdd,callback) {
+  /*post*/addJob: function(toadd,ownerToAdd,callback) {
     connect(function(mysql) {
       mysql.query("INSERT INTO job_advertisements(`titre`,`description`,`description_long`,`date_creation`,`type_poste`,`type_contrat`,`remun`,`adresse`,`ville`,`code_postal`,`pays`,`image_src`) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", toadd, function(err,r) {
         if (err) {
@@ -86,7 +92,7 @@ module.exports = {
       });
     });
   },
-  remJob: function(id,callback) {
+  /*delete*/remJob: function(id,callback) {
     connect(function(mysql) {
       mysql.query("DELETE ja,jo FROM job_advertisements ja JOIN job_owner jo ON jo.id_job = ja.id WHERE id= ?",[id],function(err,r) {
         if (err) {
@@ -98,7 +104,7 @@ module.exports = {
       });
     });
   },
-  modifyJob: function(id,col,val,callback) {
+  /*put*/modifyJob: function(id,col,val,callback) {
     connect(function(mysql) {
       mysql.query("UPDATE job_advertisements SET `"+col+"`= \""+val+"\" WHERE id=?",[id],function(err,res) {
         if (err) {
@@ -110,7 +116,7 @@ module.exports = {
       });
     });
   },
-  getRow: function(id, row, callback) {
+  /*get*/getRow: function(id, row, callback) {
     connect(function(mysql) {
       mysql.query("SELECT "+row+" as row FROM job_advertisements ja WHERE id="+id,function(err,result) {
         if (err) {
@@ -129,7 +135,8 @@ module.exports = {
       });
     });
   },
-  addUser: function(toadd,callback) {
+  /// -> working on people
+  /*post*/addUser: function(toadd,callback) {
     connect(function(mysql) {
       mysql.query("INSERT INTO `people`(`firstname`, `lastname`, `age`, `birthdate`, `description_head`, `description_skills`, `description_experience`, `isActive`, `isPro`, `mail`, `password`, `tel`, `image_src`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",toadd,function(err,r) {
         if (err) {
@@ -152,7 +159,7 @@ module.exports = {
       });
     });
   },
-  getUser: function(id,callback) {
+  /*get*/getUser: function(id,callback) {
     connect(function(mysql) {
       mysql.query("SELECT * FROM people WHERE id=?",[id],function(err,res) {
         if (err) {
@@ -164,7 +171,7 @@ module.exports = {
       });
     });
   },
-  remUser: function(id,callback) {
+  /*delete*/remUser: function(id,callback) {
     connect(function(mysql) {
       mysql.query("DELETE FROM people WHERE id=?",[id],function(err,r) {
         if (err) {
@@ -176,7 +183,7 @@ module.exports = {
       });
     });
   },
-  modifyUser: function(id,col,val,callback) {
+  /*put*/modifyUser: function(id,col,val,callback) {
     connect(function(mysql) {
       mysql.query("UPDATE people SET `"+col+"`= \""+val+"\" WHERE id=?",[id],function(err,res) {
         if (err) {
@@ -187,5 +194,35 @@ module.exports = {
         }
       });
     });
-  }
+  },
+  // working on companies
+  /*get*/getCompany: function(id, callback) {
+    connect(function(mysql) {
+      mysql.query("SELECT * FROM companies  WHERE id=?",[id],function(err,r) {
+        if (err) {
+          console.error(err.message);
+          callback(false);
+        } else {
+          callback(r[0]);
+        }
+      });
+    });
+  },
+  /*post*/addCompany: function(toadd,callback) {
+    connect(function(mysql) {
+      mysql.query("INSERT INTO `companies`(`name`, `adresse`, `ville`, `code_postal`, `pays`, `mail`, `tel`) VALUES (?,?,?,?,?,?,?)",toadd,function(err,r) {
+        if (err) {
+          console.log(err);
+          callback(false);
+        } else {
+          if (r) {
+            callback(true);
+          } else {
+            callback(false);
+          }
+        }
+      });
+    });
+  },
+  /*put*/
 }

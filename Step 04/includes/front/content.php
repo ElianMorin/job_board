@@ -10,6 +10,14 @@
         echo "Une erreur s'est produite. Veuillez réessayer plus tard.";
         exit();
       }
+      $isAlive = callapi('');
+      if (!$isAlive) {
+        echo "<div class='col s12 m12 l12'>
+                <div class=\"msg msg-alert z-depth-3\">Impossible de se connecter à l'API pour le moment. Réessayez plus tard</div>
+                <div class=\"msg msg-info z-depth-3\">Epitech : lancer d'abord le serveur node.js dans le dossier _api_server</div>
+              </div>";
+        exit();
+      }
       if (!$_GET["search"]) {
       $req = json_decode(callapi('getjobs?page='.$page));
       }
