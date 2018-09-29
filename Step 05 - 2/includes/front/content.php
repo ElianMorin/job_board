@@ -11,7 +11,7 @@
       }
       $isAlive = callapi('');
       if (!$isAlive) {
-        echo "<div class='col s12 m12 l12'>
+        echo "<div class='col s12 m12 l12 jobs'>
                 <div class=\"msg msg-alert z-depth-3\">Impossible de se connecter à l'API pour le moment. Réessayez plus tard</div>
                 <div class=\"msg msg-info z-depth-3\">Epitech : lancer d'abord le serveur node.js dans le dossier _api_server</div>
               </div>";
@@ -22,7 +22,7 @@
       }
       if (isset($req)) {
         foreach($req as $rep) {
-          echo "<div class='col s12 m12 l12'>
+          echo "<div class='col s12 m12 l12 jobs'>
                   <div id='job-".$rep->id."' class='card'>
                     <div class='card-content'>
                       <span class='card-title' jobid='job-".$rep->id."'>".$rep->titre."</span>
@@ -38,21 +38,11 @@
                 </div>";
         }
       } else {
-        echo "<div class='col s12 m12 l12'>
+        echo "<div class='col s12 m12 l12 jobs'>
                 <div class=\"msg msg-alert z-depth-3\">Impossible de se connecter à l'API pour le moment. Réessayez plus tard</div>
                 <div class=\"msg msg-info z-depth-3\">Epitech : lancer d'abord le serveur node.js dans le dossier _api_server</div>
               </div>";
       }
-      // Adding the pagination //
-      echo "
-      <div class=\"responsive center-align\">
-        <ul class=\"pagination\">
-          <li class=\"waves-effect\" action='-1'><a href=\"#!\"><i class=\"material-icons\">chevron_left</i></a></li>
-          <li class=\"active\"><a href=\"#!\">".$page."</a></li>
-          <li class=\"waves-effect\" action='1'><a href=\"#!\"><i class=\"material-icons\">chevron_right</i></a></li>
-        </ul>
-      </div>
-      ";
     } else {
       echo "<div class=\"row\" id=\"alert_box\">
               <div class=\"col s12 m12\">

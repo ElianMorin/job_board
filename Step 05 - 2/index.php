@@ -9,6 +9,7 @@
              <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
              <script type="text/javascript" src="js/constant_urlAPI.js"></script>
              <script type="text/javascript" src="js/content.js"></script>
+             <script type="text/javascript" src="js/navbar.js"></script>
              <link rel="stylesheet" href="css/content.css">
              <link rel="stylesheet" href="css/navbar.css">
              <link rel="stylesheet" href="css/header.css">
@@ -21,6 +22,13 @@
         <div class="col s12 m12 l9 container">
           <div class="row content">
             <?php include('includes/front/content.php');?>
+            <div class="responsive center-align">
+              <ul class="pagination">
+                <li class="waves-effect" action='-1'><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#!">0</a></li>
+                <li class="waves-effect" action='1'><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

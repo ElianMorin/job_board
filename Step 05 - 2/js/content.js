@@ -37,16 +37,18 @@ $(document).ready(function(){
     * PAGINATION MODIFIER
     */
     $(".pagination li").click(function(e) {
-      var page = $(".pagination.active a").text()+$(this).attr("action");
+      var page = parseInt($(".active").text())+parseInt($(this).attr("action"));
+      console.log(page);
       $.get({
         url:"includes/front/content.php",
         data: {
           page: page
         },
         success:function(content) {
-          $(".content").fadeOut();
-          $(".content").html(content);
-          $(".content").fadeIn();
+          $(".jobs").fadeOut();
+          $(".jobs").html(content);
+          $(".jobs").fadeIn();
+          $(".active").text(page);
         }
       })
     });

@@ -9,10 +9,6 @@
   padding-bottom:20px;
   margin-bottom:20px;
 }
-.profil_connect:hover {
-  color:green;
-  text-decoration: underline;
-}
 .nav_search {
   width:90% !important;
 }
@@ -27,4 +23,8 @@
 .nav_hashtags_content  p:hover {
   color:green;
   cursor:pointer;
+}
+#people_post:hover,#people_connect:hover {
+  box-shadow: inset 0 0 15px #FFFFFF;
+  background-color: rgba(8, 68, 84, 0.7);
 }

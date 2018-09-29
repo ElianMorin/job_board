@@ -159,9 +159,39 @@ module.exports = {
       });
     });
   },
+  checkUser: function(mail, password, callback) {
+    connect(function(mysql) {
+      mysql.query("SELECT * FROM people WHERE mail = ? AND password = ?",[mail,password],function(err,result) {
+        if (err) {
+          console.log(err);
+          callback(false);
+        } else {
+          if (result.length == 0) {
+            callback(false);
+          } else {
+            callback(result[0]);
+          }
+        }
+      });
+    });
+  },
+  isUserAdmin: function(id,callback) {
+    connect(function(mysql) {
+      mysql.query("SELECT isAdmin FROM people WHERE id = ?",[id],function(err,res) {
+        if (err) {
+          console.log(err);
+          callback(false);
+        } else {
+          callback(res[0].isAdmin);
+        }
+      });
+    });
+  },
   /*get*/getUser: function(id,callback) {
     connect(function(mysql) {
       mysql.query("SELECT * FROM people WHERE id=?",[id],function(err,res) {
+        console.log(err);
+        console.log(res);
         if (err) {
           console.log(err);
           callback(false);
