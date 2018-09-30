@@ -105,18 +105,14 @@ router.route('/getjobs').get(function(req,res) {
   });
 });
 
-router.route('/user/connect').post(function(req,res) {
-
-})
-
 // 2.
 
 router.route('/user').all(function(req,res,next) {
-  checkTokenAccess(req.query.token,res,2,function(r) {
-    if (r) {
-      next();
-    }
-  })                                                                   // post
+  //checkTokenAccess(req.query.token,res,1,function(r) {
+    //if (r) {
+      //next();
+    //}
+  //})                                                                   // post
 }).post(function(req,res) {
   var infos = [];
   Object.keys(req.query).forEach(function(key) {
@@ -275,6 +271,15 @@ router.route('/token').get(function(req,res) {
         res.json({result:false});
       }
     });
+  } else if (typeof req.query.token != "undefined") {
+    console.log("Checking token access")
+    checkTokenAccess(req.query.token,res,1,function(r) {
+      if (r) {
+        res.json({result:true});
+      } else {
+        res.json({result:false});
+      }
+    })
   } else {
     res.json({result:false});
   }
@@ -283,6 +288,7 @@ function checkTokenAccess(token, res, levelAccess,callback) {
   // LevelAccess 0 = API ouverte à tous.
   if (levelAccess == 0) {callback(true);return;}
   // LevelAccess 1 & 2 = API nécessite d'être loggé.
+  // LevelAccess 1.2 = Loggé et peut requêter que là où il a la permission = son user, ses annonces etc...
   if (typeof token == "undefined") {
     res.send("-=- ERROR -=- Vous n'avez pas spécifié de token.");
   } else if(decodedToken = tokenHandler.decodeToken(token)) {
@@ -295,7 +301,9 @@ function checkTokenAccess(token, res, levelAccess,callback) {
             res.send("-=- ERROR -=- Vous n'avez pas la permission");
           }
         })
-      } else {
+      } else if (levelAccess == 1.2) {
+        callback(decodedToken);
+      } else if (levelAccess == 1) {
         callback(true);
       }
     } else {

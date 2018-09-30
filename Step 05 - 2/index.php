@@ -18,7 +18,9 @@
     <body>
       <?php include('includes/front/header.php');?>
       <div class="row">
-        <?php include('includes/front/navbar.php');?>
+        <div id="navbar">
+          <?php include('includes/front/navbar.php');?>
+        </div>
         <div class="col s12 m12 l9 container">
           <div class="row content">
             <?php include('includes/front/content.php');?>

@@ -1,3 +1,4 @@
+var isLogged = false;
 $(function() {
   // Dynamical height with content.
   $(".menuleft").css("height",$(".container").css("height"));
@@ -37,9 +38,9 @@ $(function() {
             success:function(r) {
               if (typeof r.result != "undefined" && r.result) {
                 alert("cet utilisateur existe !");
-                alert(r.token);
+                setCookie("usertoken",r.token,7);
               } else {
-                alert("Cet utilisateur n'existe pas ou le mot de passe a été mal saisie. VEuillez réessayer");
+                alert("Cet utilisateur n'existe pas ou le mot de passe a été mal saisie. Veuillez réessayer");
                 console.log(r);
               }
             },
@@ -72,7 +73,37 @@ $(function() {
     }
     return false;
   }
+  function setCookie(name,value,days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+  }
   if (getCookie("usertoken")) {
-
+    var token = getCookie("usertoken");
+    isLogged = token;
+    $.getJSON({
+      url: url_api,
+      data: {
+        api: "token",
+        query:"?token="+token
+      },
+      success:function(r) {
+        if (r.result) {
+          $.get({
+            url: "includes/front/navbar.php",
+            data: {
+              logged:true
+            },
+            success: function(menuleft) {
+              $("#navbar").html(menuleft);
+            }
+          })
+        }
+      }
+    });
   }
 })
