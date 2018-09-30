@@ -56,9 +56,18 @@ $(document).ready(function(){
      * Applu for a job
      */
      $("a[action=\"apply\"]").click(function(e) {
+       e.preventDefault();
+       $("#modal1").remove();
        var jobid = $(this).attr("jobid");
+       var url = "includes/front/popups/applypopupconnect.php";
+       if (isLogged) {
+         url = "includes/front/popups/applypopup.php";
+       }
        $.get({
-         url:"includes/front/applypopup.php",
+         url: url,
+         data: {
+           jobid: jobid
+         },
          success:function(html) {
            $("body").append(html);
          },
