@@ -33,7 +33,7 @@
                     </div>
                     <div class=\"card-reveal\"><span class=\"card-title grey-text desactivator text-darken-4\" jobid='job-".$rep->id."' action='close'>".$rep->titre."<i class=\"material-icons right\">close</i></span>
                       <p jobid='job-".$rep->id."' class='getjobs-tofill'></p>
-                      <a style=\"position: absolute; bottom: 20pt; right: 20pt;\" href=\"\" jobid='job-".$rep->id."'><h5>Apply</h5></a></div>
+                      <a style=\"position: absolute; bottom: 20pt; right: 20pt;\" action=\"apply\" href=\"\" jobid='job-".$rep->id."'><h5>Apply</h5></a></div>
                   </div>
                 </div>";
         }

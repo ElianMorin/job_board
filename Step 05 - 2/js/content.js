@@ -52,4 +52,19 @@ $(document).ready(function(){
         }
       })
     });
+    /*
+     * Applu for a job
+     */
+     $("a[action=\"apply\"]").click(function(e) {
+       var jobid = $(this).attr("jobid");
+       $.get({
+         url:"includes/front/applypopup.php",
+         success:function(html) {
+           $("body").append(html);
+         },
+         fail:function(e) {
+           alert("Can't load apply. Try again later");
+         }
+       })
+     })
 });
